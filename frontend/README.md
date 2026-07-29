@@ -1,16 +1,51 @@
-# React + Vite
+# focusSync — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This folder contains the frontend application for focusSync, built with React + Vite and TailwindCSS.
 
-Currently, two official plugins are available:
+## Overview
+Modern UI for the Virtual Assistant (Jarvis) including register, login and OTP verification flows.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Prerequisites
+- Node.js (16+)
+- npm
 
-## React Compiler
+## Install
+From the `frontend` folder:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+```
 
-## Expanding the Oxlint configuration
+## Run (development)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm run dev
+```
+
+Open the app at the address reported by Vite (usually `http://localhost:5173`).
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Environment
+The frontend uses a `serverUrl` configured in `frontend/src/context/Usercontext.jsx` by default:
+
+```js
+const serverUrl = "http://localhost:8000";
+```
+
+If your backend runs on a different URL, update this value or add a small `.env` wrapper to inject it at build time.
+
+## Auth flow
+- Register → server sends OTP → user verifies code in the `VerifyEmail` component
+- Login will redirect to verify page if email is unverified
+
+## Contributing
+Please open issues or PRs — keep UI/UX changes focused and add screenshots where helpful.
+
+## License
+Specify license as appropriate.
