@@ -1,5 +1,18 @@
 # focusSync
 
+---
+
+## Authentication
+
+The backend implements a full authentication system used by the frontend. Key features:
+
+- Access & Refresh tokens: the API issues short-lived access tokens and long-lived refresh tokens (JWT). Refresh tokens are stored in secure cookies and used to obtain new access tokens without requiring re-login.
+- Email verification & OTP: registration triggers an OTP sent to the user's email; the `VerifyEmail` flow validates the OTP before allowing access.
+- Nodemailer (OAuth2): outgoing emails are sent using a Nodemailer setup with OAuth2 (Google) credentials. Configure `EMAIL_USER`, `CLIENT_ID`, `CLIENT_SECRET`, and `REFRESH_TOKEN` in the backend `.env`.
+- Google Auth: an OAuth2 sign-in flow is supported for login/registration; configure `CLIENT_ID`, `CLIENT_SECRET`, and `REDIRECT_URI`.
+
+See `backend/controller/auth.controller.js`, `backend/services/email.js`, and `backend/routes/auth.routes.js` for implementation details.
+
 Monorepo containing frontend and backend for the focusSync project (Virtual Assistant / Jarvis-style UI).
 
 This repository contains two main folders:
@@ -92,11 +105,3 @@ The frontend reads backend URL from `frontend/src/context/Usercontext.jsx` by de
 - Keep `.env` files out of source control. Use `.env.example` as a template.
 - If using Gmail OAuth for sending emails, ensure the refresh token and client secrets are valid and the callback/redirect URI matches the Google Console settings.
 - You can change ports in `backend/.env` and update `frontend/src/context/Usercontext.jsx` accordingly.
-
----
-
-If you want, I can:
-- add a root-level `docker-compose.yml` to run frontend, backend, and a MongoDB service together
-- add a startup script that launches both dev servers concurrently
-- add env validation at backend startup to fail fast when required vars are missing
-
